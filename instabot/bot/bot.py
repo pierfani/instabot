@@ -364,10 +364,11 @@ class Bot(object):
 
     def get_media_likers(self, media_id):
         return get_media_likers(self, media_id)
-
+#pierfani 10.07.18
     def get_media_comments(self, media_id, only_text=False):
-        return get_media_comments(self, media_id, only_text)
-
+        # return get_media_comments(self, media_id, only_text)
+        return get_media_comments(self, media_id)
+#pierfani 10.07.18
     def get_comment(self):
         return get_comment(self)
 

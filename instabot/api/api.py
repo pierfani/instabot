@@ -451,11 +451,26 @@ class API(object):
         data = self.json_data({'media_id': media_id})
         url = 'media/{media_id}/unlike/'.format(media_id=media_id)
         return self.send_request(url, data)
+#pierfani 10.07.18
+    # def get_media_comments(self, media_id):
+    #     url = 'media/{media_id}/comments/?'.format(media_id=media_id)
+    #     return self.send_request(url)
+    def get_media_comments(self, mediaId, max_id=None, comments=None):
+        if not comments:
+            comments = []
+        
+        url = 'media/' + str(mediaId) + '/comments/?'
+        if max_id:
+            url += "max_id=%s" % max_id
+        self.send_request(url)
+        comments += self.last_json["comments"]
 
-    def get_media_comments(self, media_id):
-        url = 'media/{media_id}/comments/?'.format(media_id=media_id)
-        return self.send_request(url)
-
+        if self.last_json["has_more_comments"]:
+            return self.get_media_comments(
+                mediaId, max_id=self.last_json["next_max_id"],
+                comments=comments)
+        return comments
+#pierfani 10.07.18
     def get_direct_share(self):
         return self.send_request('direct_share/inbox/?')
 

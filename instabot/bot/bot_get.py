@@ -205,23 +205,27 @@ def get_media_likers(self, media_id):
         return []
     return list(map(lambda user: str(user['pk']), self.api.last_json["users"]))
 
+#pierfani 10.07.18
+# def get_media_comments(self, media_id, only_text=False):
+#     self.api.get_media_comments(media_id)
+#     if 'comments' not in self.api.last_json:
+#         return []
+#     if only_text:
+#         return [str(item["text"]) for item in self.api.last_json['comments']]
+#     return self.api.last_json['comments']
 
+
+# def get_media_commenters(self, media_id):
+#     self.get_media_comments(media_id)
+#     if 'comments' not in self.api.last_json:
+#         return []
+#     return [str(item["user"]["pk"]) for item in self.api.last_json['comments']]
 def get_media_comments(self, media_id, only_text=False):
-    self.api.get_media_comments(media_id)
-    if 'comments' not in self.api.last_json:
-        return []
-    if only_text:
-        return [str(item["text"]) for item in self.api.last_json['comments']]
-    return self.api.last_json['comments']
-
+    return self.api.get_media_comments(media_id)
 
 def get_media_commenters(self, media_id):
-    self.get_media_comments(media_id)
-    if 'comments' not in self.api.last_json:
-        return []
-    return [str(item["user"]["pk"]) for item in self.api.last_json['comments']]
-
-
+   return "get_media_commenters Not yet implemented!"
+#pierfani 10.07.18
 def search_users(self, query):
     self.api.search_users(query)
     if "users" not in self.api.last_json:
